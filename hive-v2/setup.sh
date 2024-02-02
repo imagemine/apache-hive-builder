@@ -30,10 +30,12 @@ remove_libs() {
   local lib_file="/tmp/hive-v2/delete-libs.properties"
   for line in $(cat ${lib_file})
   do
+    echo "Process deleting for " $line
     for jf in $(ls $target)
     do
+      echo checking $target/$jf
       if [[ -d $target/$jf ]]; then
-        remove_libs $target/$jf
+        continue;
       else
         if [[ "$jf" == "$line" ]]; then
           echo "Removing jar $target/$jf"
