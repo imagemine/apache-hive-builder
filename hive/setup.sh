@@ -27,13 +27,15 @@ extra_libs() {
 # Function to remove specified libraries
 remove_libs() {
   local target=$1
-  local lib_file="/tmp/hive/delete-libs.properties"
+  local lib_file="/tmp/hive-v2/delete-libs.properties"
   for line in $(cat ${lib_file})
   do
+    echo "Process deleting for " $line
     for jf in $(ls $target)
     do
+      echo checking $target/$jf
       if [[ -d $target/$jf ]]; then
-        remove_libs $target/$jf
+        continue;
       else
         if [[ "$jf" == "$line" ]]; then
           echo "Removing jar $target/$jf"
@@ -61,7 +63,7 @@ tar zxf /tmp/hive/apache-hive-${HIVE_BIN_VERSION}-bin.tar.gz -C /opt/app && \
     cp /opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/tools/lib/aws-java-sdk-bundle-1.12.367.jar /opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/ && \
     rm /tmp/hive/*.gz && rm -rf /tmp/hive/output && rm -rf /tmp/hive/data
 
-exclude_files=("hive-cli" "hive-exec" "hive-metastore", "aws-java-sdk-bundle")
+exclude_files=("hive-cli" "hive-metastore", "aws-java-sdk-bundle")
 
 clean_unused_files() {
   local target=$1
@@ -76,7 +78,7 @@ clean_unused_files() {
     fi
 
     if [[ -d $target/$jf ]]; then
-      clean_unused_files $target/$jf 0;
+      continue;
     else
       cleaned=0
       echo "---cleaning file" $target/$jf
@@ -115,6 +117,7 @@ clean_unused_files_v2() {
       cleaned=0
       for pom in $(jar tvf $target/$jf|grep -E ${resname}|awk -F" " '{print $8}');
       do
+        echo removing $pom out of $target/$jf
         zip -d $target/$jf $pom
         cleaned=1
       done;
@@ -151,18 +154,19 @@ do
   # echo .
 done;
 
-extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/"
-extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib/"
-extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib/"
+extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
+extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
+extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
 
-remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/"
-remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/jdbc/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/csi/lib/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/timelineservice/lib/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib/"
+remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
+remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/jdbc"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/csi/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/timelineservice/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/lib"
 
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "jquery.*.js$" "scala-compiler.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "jquery.*.js$" "spark-core_.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "jquery.*.js$" "hive-llap-server.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "scala-compiler.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "spark-core_.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-llap-server.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
