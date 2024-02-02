@@ -98,6 +98,7 @@ clean_unused_files_v2() {
       cleaned=0
       for pom in $(jar tvf $target/$jf|grep -E ${resname}|awk -F" " '{print $8}');
       do
+        echo removing $pom out of $target/$jf
         zip -d $target/$jf $pom
         cleaned=1
       done;
@@ -115,18 +116,18 @@ clean_unused_files_v2() {
   done;
 }
 
-extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/"
-extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib/"
-extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib/"
+extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
+extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
+extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
 
-remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/"
-remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/jdbc/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/csi/lib/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/timelineservice/lib/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib/"
-remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib/"
+remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
+remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/jdbc"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/csi/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/timelineservice/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
+remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
 
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "jquery.*.js$" "scala-compiler.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "jquery.*.js$" "spark-core_.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "jquery.*.js$" "hive-llap-server.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "scala-compiler.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "spark-core_.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-llap-server.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
