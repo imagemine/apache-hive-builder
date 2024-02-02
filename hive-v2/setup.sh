@@ -7,7 +7,7 @@ fi;
 
 extra_libs() {
   local target=$1
-  local lib_file="/tmp/hive/extra-libs.properties"
+  local lib_file="/tmp/hive-v2/extra-libs.properties"
   for line in $(cat ${lib_file})
   do
     echo $line
@@ -27,7 +27,7 @@ extra_libs() {
 # Function to remove specified libraries
 remove_libs() {
   local target=$1
-  local lib_file="/tmp/hive/delete-libs.properties"
+  local lib_file="/tmp/hive-v2/delete-libs.properties"
   for line in $(cat ${lib_file})
   do
     for jf in $(ls $target)
