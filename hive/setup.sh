@@ -173,3 +173,6 @@ clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "netty-
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "guava.*$" "hive-exec.*.jar"
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "protobuf-java.*$" "hive-exec.*.jar"
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-exec.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-exec.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "org.apache.avro/avro/.*.js$" "hive-service.*.jar"
+clean_unused_files_v2 "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/tools/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
