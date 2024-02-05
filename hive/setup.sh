@@ -63,7 +63,7 @@ tar zxf /tmp/hive/apache-hive-${HIVE_BIN_VERSION}-bin.tar.gz -C /opt/app && \
     cp /opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/tools/lib/aws-java-sdk-bundle-1.12.367.jar /opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/ && \
     rm /tmp/hive/*.gz && rm -rf /tmp/hive/output && rm -rf /tmp/hive/data
 
-exclude_files=("hive-cli" "hive-metastore", "aws-java-sdk-bundle")
+exclude_files=("hive-cli" "hive-exec" "hive-metastore", "aws-java-sdk-bundle")
 
 clean_unused_files() {
   local target=$1
@@ -170,3 +170,6 @@ clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "spark-core_.*.jar"
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-llap-server.*.jar"
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "guava.*.js$" "hive-exec.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "protobuf-java.*.js$" "hive-exec.*.jar"
+clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-exec.*.jar"
