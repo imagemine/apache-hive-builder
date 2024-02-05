@@ -27,7 +27,7 @@ extra_libs() {
 # Function to remove specified libraries
 remove_libs() {
   local target=$1
-  local lib_file="/tmp/hive-v2/delete-libs.properties"
+  local lib_file="/tmp/hive/delete-libs.properties"
   for line in $(cat ${lib_file})
   do
     echo "Process deleting for " $line
