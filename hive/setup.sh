@@ -175,3 +175,29 @@ clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "protob
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "avro.*.js$" "hive-exec.*.jar"
 clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-service.*.jar"
 clean_unused_files_v2 "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/tools/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
+
+remove_avro_from_hive_exec() {
+  local hive_exec_path="/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib/hive-exec-3.1.3.jar"
+  local temp_dir="/tmp/hive-exec-unpack"
+  
+  # Create a temporary directory to unpack hive-exec-3.1.3.jar
+  mkdir -p "${temp_dir}"
+  (cd "${temp_dir}" && jar -xf "${hive_exec_path}")
+  
+  # Check if avro-1.8.2.jar exists in the unpacked directory and remove it
+  local avro_path="${temp_dir}/avro-1.8.2.jar"
+  if [[ -f "${avro_path}" ]]; then
+    echo "Removing avro-1.8.2.jar from hive-exec-3.1.3.jar"
+    rm "${avro_path}"
+  else
+    echo "avro-1.8.2.jar not found in hive-exec-3.1.3.jar"
+  fi
+  
+  # Repackage the hive-exec-3.1.3.jar without avro-1.8.2.jar
+  (cd "${temp_dir}" && jar -cf "${hive_exec_path}" .)
+  
+  # Clean up the temporary directory
+  rm -rf "${temp_dir}"
+}
+
+remove_avro_from_hive_exec
