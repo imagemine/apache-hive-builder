@@ -155,8 +155,8 @@ do
 done;
 
 extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
-extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
-extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
+# extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
+# extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
 
 # remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
 # remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/jdbc"
