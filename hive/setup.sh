@@ -72,8 +72,7 @@ clean_unused_files() {
   local cleaned=0
   for jf in $(ls $target);
   do
-    
-    if [[ "${exclude_files[@]}" =~ ${jf%%-*} ]]; then
+      if [[ "${exclude_files[@]}" =~ ${jf%%-*} ]]; then
       continue
     fi
 
@@ -166,15 +165,15 @@ extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
 # remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
 # remove_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/yarn/lib"
 
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "scala-compiler.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "spark-core_.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-llap-server.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "guava.*$" "hive-exec.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "protobuf-java.*$" "hive-exec.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "avro.*.js$" "hive-exec.*.jar"
-clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-service.*.jar"
-clean_unused_files_v2 "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/tools/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "scala-compiler.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "spark-core_.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-llap-server.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "guava.*$" "hive-exec.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "protobuf-java.*$" "hive-exec.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "avro.*.js$" "hive-exec.*.jar"
+# clean_unused_files_v2 "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib" "jquery.*.js$" "hive-service.*.jar"
+# clean_unused_files_v2 "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/tools/lib" "netty-handler/pom.(xml|properties)$" "aws-java-sdk-bundle.*.jar"
 
 
 
