@@ -5,24 +5,24 @@ if [[ -z ${HIVE_BIN_VERSION} ]] || [[ -z $HADOOP_BIN_VERSION ]]; then
   exit 1;
 fi;
 
-# extra_libs() {
-#   local target=$1
-#   local lib_file="/tmp/hive/extra-libs.properties"
-#   for line in $(cat ${lib_file})
-#   do
-#     echo $line
-#     fname=$(basename $line)
-#     patt="^"$(echo $fname | sed -E "s/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+\.[0-9]+\.[0-9]+/g")"$"
-#     set +e
-#     matching_file=$(ls $target | grep -E $patt | head -1)
-#     if [[ $matching_file != "" ]]; then
-#       echo "Removing old version ${matching_file} and replacing with ${fname}"
-#       rm $target/$matching_file
-#     fi
-#     set -e
-#     curl -sL -o ${target}/${fname} ${line}
-#   done
-# }
+extra_libs() {
+  local target=$1
+  local lib_file="/tmp/hive/extra-libs.properties"
+  for line in $(cat ${lib_file})
+  do
+    echo $line
+    fname=$(basename $line)
+    patt="^"$(echo $fname | sed -E "s/[0-9]+\.[0-9]+\.[0-9]+/[0-9]+\.[0-9]+\.[0-9]+/g")"$"
+    set +e
+    matching_file=$(ls $target | grep -E $patt | head -1)
+    if [[ $matching_file != "" ]]; then
+      echo "Removing old version ${matching_file} and replacing with ${fname}"
+      rm $target/$matching_file
+    fi
+    set -e
+    curl -sL -o ${target}/${fname} ${line}
+  done
+}
 
 # Function to remove specified libraries
 # remove_libs() {
@@ -154,9 +154,9 @@ do
   # echo .
 done;
 
-# extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
-# extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
-# extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
+extra_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
+extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/hdfs/lib"
+extra_libs "/opt/app/hadoop-${HADOOP_BIN_VERSION}/share/hadoop/common/lib"
 
 # remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/lib"
 # remove_libs "/opt/app/apache-hive-${HIVE_BIN_VERSION}-bin/jdbc"
