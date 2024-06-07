@@ -29,5 +29,9 @@ dependencies {
         compileOnly("io.trino:${name}:418")
     }
     compileOnly("org.slf4j:slf4j-api:1.7.36")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    testImplementation 'com.amazonaws:aws-java-sdk-core:1.11.1000'
 }
 
