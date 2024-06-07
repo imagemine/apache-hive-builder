@@ -10,6 +10,7 @@ out
 .gradle
 hive/output
 hive/data
+.DS_Store
 
 
 
