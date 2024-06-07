@@ -32,8 +32,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
     testImplementation("org.mockito:mockito-core:3.7.7")
+    testImplementation("org.mockito:mockito-inline:3.7.7")
     testImplementation("com.amazonaws:aws-java-sdk-core:1.11.1000")
+    testImplementation("com.amazonaws:aws-java-sdk-sts:1.11.1000")
+    testImplementation("com.amazonaws:aws-java-sdk-s3:1.11.1000")
 }
+
 
 tasks.test {
     useJUnitPlatform()
